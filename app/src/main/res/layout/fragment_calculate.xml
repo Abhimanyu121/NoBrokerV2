@@ -312,7 +312,7 @@
                     android:inputType="text"
                     android:maxLines="1"
                     android:singleLine="true" />
-                <EditText
+           <!--     <EditText
                     android:id="@+id/face"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -322,7 +322,13 @@
                     android:imeOptions="actionUnspecified"
                     android:inputType="text"
                     android:maxLines="1"
-                    android:singleLine="true" />
+                    android:singleLine="true" /> -->
+                <Spinner
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/direction_face">
+
+                </Spinner>
                 <EditText
                     android:id="@+id/floor"
                     android:layout_width="match_parent"

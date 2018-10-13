@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.Button
 import android.widget.Spinner
 import com.android.volley.*
 import com.android.volley.Request.Method.POST
@@ -44,7 +45,8 @@ class calculate : Fragment() {
         mView =inflater.inflate(R.layout.fragment_calculate, container, false)
         attachadapter()
         rq = Volley.newRequestQueue(context)
-        cal_button.setOnClickListener(){
+        val button=mView!!.findViewById<Button>(R.id.cal_button)
+        button.setOnClickListener(){
             senddata()
         }
 
@@ -63,6 +65,11 @@ class calculate : Fragment() {
         bhkadapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         val bhkspinner=mView!!.findViewById<Spinner>(R.id.bhk_spinner)
         bhkspinner.adapter=bhkadapter
+        var directiontype=arrayOf("N","S","W","E","NE","SE","SW","NW")
+        val directionadapter = ArrayAdapter<String>(context,android.R.layout.simple_spinner_item, directiontype)
+        directionadapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        val directionspinner=mView!!.findViewById<Spinner>(R.id.direction_face)
+        directionspinner.adapter=directionadapter
 
 
     }
@@ -101,7 +108,7 @@ class calculate : Fragment() {
                 params["age"]= age.text.toString()
                 params["bath"]= bath.text.toString()
                 params["cupboard"]= cupboard.text.toString()
-                params["direction"]=face.text.toString()
+                params["direction"]=direction_face.selectedItem.toString()
                 params["floor"]= floor.text.toString()
                 if(furn1.isChecked)
                     params["furnished"]= "1"
