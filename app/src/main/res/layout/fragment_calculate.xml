@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".calculate">
+    tools:context=".calculate"
+    android:id="@+id/parentCalc">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -111,7 +112,13 @@
                     <EditText
                         android:layout_column="0"
                         android:layout_row="2"
+                        android:id="@+id/sizeprop"
                         android:hint="@string/size_of_property"/>
+                    <EditText
+                        android:layout_column="1"
+                        android:layout_row="2"
+                        android:id="@+id/floorst"
+                        android:hint="@string/floor_to_stay_on"/>
 
                 </GridLayout>
             </LinearLayout>
@@ -180,6 +187,21 @@
                         <CheckBox
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:id="@+id/hk"
+                            android:text="@string/house_keeping"/>
+                        <CheckBox
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/pb"
+                            android:text="@string/pb"/>
+                        <CheckBox
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/servant"
+                            android:text="@string/servant"/>
+                        <CheckBox
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
                             android:id="@+id/fs"
                             android:text="FS"/>
 
@@ -225,6 +247,16 @@
                             android:layout_height="wrap_content"
                             android:id="@+id/sc"
                             android:text="@string/sc"/>
+                        <CheckBox
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/ag"
+                            android:text="@string/ag"/>
+                        <CheckBox
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/ah"
+                            android:text="@string/ah"/>
 
                     </LinearLayout>
 
@@ -268,17 +300,12 @@
                     android:text="Extras"
                     android:textAlignment="center"
                     android:gravity="center_horizontal"/>
-                <EditText
-                    android:id="@+id/psize"
+                <Spinner
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Property Size"
-                    android:imeActionId="6"
-                    android:imeActionLabel="Property size"
-                    android:imeOptions="actionUnspecified"
-                    android:inputType="text"
-                    android:maxLines="1"
-                    android:singleLine="true" />
+                    android:id="@+id/water">
+
+                </Spinner>
                 <EditText
                     android:id="@+id/age"
                     android:layout_width="match_parent"
@@ -312,6 +339,28 @@
                     android:inputType="text"
                     android:maxLines="1"
                     android:singleLine="true" />
+                <EditText
+                    android:id="@+id/balconies"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/number_of_balconies"
+                    android:imeActionId="6"
+                    android:imeActionLabel="@string/action_sign_in_short"
+                    android:imeOptions="actionUnspecified"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:singleLine="true" />
+                <EditText
+                    android:id="@+id/deposit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/deposit"
+                    android:imeActionId="6"
+                    android:imeActionLabel="@string/action_sign_in_short"
+                    android:imeOptions="actionUnspecified"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:singleLine="true" />
            <!--     <EditText
                     android:id="@+id/face"
                     android:layout_width="match_parent"
@@ -326,7 +375,12 @@
                 <Spinner
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/direction_face">
+                    android:id="@+id/direction_face"/>
+                <Spinner
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/buildingtype">
+
 
                 </Spinner>
                 <EditText

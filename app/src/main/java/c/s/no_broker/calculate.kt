@@ -5,12 +5,11 @@ import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.util.Log
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import android.widget.Button
-import android.widget.Spinner
+import android.widget.*
 import com.android.volley.*
 import com.android.volley.Request.Method.POST
 import com.android.volley.RequestQueue
@@ -70,13 +69,26 @@ class calculate : Fragment() {
         directionadapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         val directionspinner=mView!!.findViewById<Spinner>(R.id.direction_face)
         directionspinner.adapter=directionadapter
+        var watertype=arrayOf("Corporation","Corporation Bore Well","Bore well")
+        val wateradapter = ArrayAdapter<String>(context,android.R.layout.simple_spinner_item, watertype)
+        wateradapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        val waterspinner=mView!!.findViewById<Spinner>(R.id.water)
+        waterspinner.adapter=wateradapter
+        var buildingtype=arrayOf("Apartment","Flat","House")
+        val buildadapter = ArrayAdapter<String>(context,android.R.layout.simple_spinner_item, buildingtype)
+        buildadapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        val buildspinner=mView!!.findViewById<Spinner>(R.id.buildingtype)
+        buildspinner.adapter=buildadapter
 
 
     }
     fun senddata(){
         val url=""
-        var jsonBody = JSONObject()
+       // var jsonBody = JSONObject()
         stringreq= object: StringRequest (Request.Method.POST,url,Response.Listener<String>{response ->
+            val obj= JSONObject(response)
+            val parentview=mView!!.findViewById<View>(R.id.parentCalc)
+            initiatePopoupWindow(parentview,obj.getString("name"),obj.getString("price"))
 
         },Response.ErrorListener { error ->
             Log.e("Volley error", error.message)
@@ -89,7 +101,8 @@ class calculate : Fragment() {
                 Log.e("first", "point4")
                 params["name"] = pxname.text.toString()
                 params["lease_type"] = lease_type.selectedItem.toString()
-                params["size"]= psize.text.toString()
+                params["size"]= sizeprop.text.toString()
+
                 params["gym"]= (if(gym.isChecked) 1 else 0).toString()
                 params["lift"]= (if(lift.isChecked) 1 else 0).toString()
                 params["internet"]= (if(internet.isChecked) 1 else 0).toString()
@@ -110,6 +123,19 @@ class calculate : Fragment() {
                 params["cupboard"]= cupboard.text.toString()
                 params["direction"]=direction_face.selectedItem.toString()
                 params["floor"]= floor.text.toString()
+                params["hk"]= (if(hk.isChecked) 1 else 0).toString()
+                params["ag"]= (if(ag.isChecked) 1 else 0).toString()
+                params["ah"]= (if(ah.isChecked) 1 else 0).toString()
+                params["servant"]= (if(servant.isChecked) 1 else 0).toString()
+                params["fs"]= (if(fs.isChecked) 1 else 0).toString()
+                params["balcony"]= balconies.text.toString()
+                params["deposits"]= deposit.text.toString()
+                if(buildingtype.selectedItem.equals("Apartment"))
+                    params["building_type"]= "ap"
+                if(buildingtype.selectedItem.equals("Flat"))
+                    params["building_type"]= "if"
+                if(buildingtype.selectedItem.equals("House"))
+                    params["building_type"]= "ih"
                 if(furn1.isChecked)
                     params["furnished"]= "1"
                 else{
@@ -121,6 +147,10 @@ class calculate : Fragment() {
                     params["vehicle"] ="f"
                 else
                     params["vehicle"] ="b"
+                params["floorstay"]= floorst.text.toString()
+                params["face_direction"] =direction_face.selectedItem.toString()
+
+
 
                 return params
             }
@@ -128,6 +158,37 @@ class calculate : Fragment() {
         }
         rq!!.add(stringreq)
 
+    }
+    private fun initiatePopoupWindow(v:View,name:String,price:String){
+        try{
+
+            val inflater=context!!.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+            val customView=inflater.inflate(R.layout.calculated_price,null)
+            var tname=customView.findViewById<TextView>(R.id.cname)
+            var tprice=customView.findViewById<TextView>(R.id.price)
+            var tbutton=customView.findViewById<Button>(R.id.calbutton)
+
+            var mPopupWindow = PopupWindow(customView,
+                    ViewGroup.LayoutParams.WRAP_CONTENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT
+            )
+            tname.text = name
+            tprice.text = price
+            tbutton.setOnClickListener{
+                mPopupWindow.dismiss()
+            }
+
+
+            mPopupWindow.isFocusable = true
+            mPopupWindow.isTouchable = true
+            mPopupWindow.showAtLocation(v, Gravity.CENTER,0,0)
+            mPopupWindow.update()
+
+
+        }
+        catch(e: Exception){
+            Log.e("blehpop2",e.message)
+        }
     }
 
 

@@ -60,4 +60,13 @@
     <string name="fully_furnished">Fully Furnished</string>
     <string name="semi_furnished">Semi Furnished</string>
     <string name="two_wheeler">Two Wheeler</string>
+    <string name="price">Price</string>
+    <string name="floor_to_stay_on">Floor to Stay On</string>
+    <string name="house_keeping">House Keeping</string>
+    <string name="pb">PB</string>
+    <string name="servant">Servant</string>
+    <string name="ag">AG</string>
+    <string name="ah">AH</string>
+    <string name="number_of_balconies">Number of Balconies</string>
+    <string name="deposit">Deposit</string>
 </resources>
