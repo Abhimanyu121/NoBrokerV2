@@ -4,6 +4,7 @@ import android.content.Context
 import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.widget.CardView
 import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
@@ -45,11 +46,46 @@ class calculate : Fragment() {
         attachadapter()
         rq = Volley.newRequestQueue(context)
         val button=mView!!.findViewById<Button>(R.id.cal_button)
+        val cardView = mView!!.findViewById<LinearLayout>(R.id.misc_card)
+        val extraView = mView!!.findViewById<LinearLayout>(R.id.extras_card)
+        cardView.visibility=View.GONE
+        extraView.visibility=View.GONE
         button.setOnClickListener(){
             senddata()
         }
-
+        val _misc_collap = mView!!.findViewById<Button>(R.id.collap_misc)
+        _misc_collap.setOnClickListener {
+            misc_collap()
+        }
+        val _collap_extra = mView!!.findViewById<Button>(R.id.collap_extras)
+        _collap_extra.setOnClickListener {
+            _extra_collap()
+        }
         return mView
+    }
+    fun misc_collap(){
+        val cardView = mView!!.findViewById<LinearLayout>(R.id.misc_card)
+        val _misc_collap = mView!!.findViewById<Button>(R.id.collap_misc)
+        if(cardView.visibility==View.VISIBLE){
+            cardView.visibility=View.GONE
+            _misc_collap.text="\\/"
+        }
+        else{
+            cardView.visibility=View.VISIBLE
+            _misc_collap.text="""/\"""
+        }
+    }
+    fun _extra_collap(){
+        val cardView = mView!!.findViewById<LinearLayout>(R.id.extras_card)
+        val button = mView!!.findViewById<Button>(R.id.collap_extras)
+        if(cardView.visibility==View.VISIBLE){
+            cardView.visibility=View.GONE
+            button.text="\\/"
+        }
+        else{
+            cardView.visibility=View.VISIBLE
+            button.text="""/\"""
+        }
     }
 
 

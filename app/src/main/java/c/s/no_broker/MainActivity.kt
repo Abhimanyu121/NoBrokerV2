@@ -101,10 +101,10 @@ class MainActivity : AppCompatActivity() {
         id= 1.toString()
         val preferences = PreferenceManager.getDefaultSharedPreferences(this)
         val status = preferences.getBoolean("status", false)
-        if (status==false){
+      /**  if (status==false){
             val intent = Intent(this,LoginActivity::class.java)
             startActivity(intent)
-        }
+        }**/
 
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
     }
